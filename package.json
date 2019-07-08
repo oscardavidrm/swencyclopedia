@@ -1,0 +1,31 @@
+{
+  "name": "swencyclopedia",
+  "version": "1.0.0",
+  "description": "Star Wars fan encyclopedia full, and solely based on Starhub API by Rachel Wong",
+  "main": "index.js",
+  "repository": "https://github.com/oscardavidrm/swencyclopedia.git",
+  "author": "Oscar Rodríguez <oscardavidrodriguezm@gmail.com>",
+  "license": "MIT",
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ]
+  },
+  "scripts": {
+    "start": "webpack-dev-server --open --hot --mode development",
+    "build": "webpack --mode production"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.5.0",
+    "@babel/preset-env": "^7.5.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.6",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-hot-loader": "^4.12.5",
+    "webpack": "^4.35.3",
+    "webpack-cli": "^3.3.5",
+    "webpack-dev-server": "^3.7.2"
+  }
+}
