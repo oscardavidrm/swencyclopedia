@@ -2,7 +2,7 @@ import React from "react";
 
 const PaginationSelector = ({ prev, next, page, onPageChange }) => {
   return (
-    <ul className='pagination pagination-lg'>
+    <ul className='pagination pagination-lg justify-content-center'>
       <li
         onClick={() => onPageChange("prev", page)}
         className={`page-item ${!prev && "disabled"}`}
