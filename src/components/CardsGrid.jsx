@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import http from "../services/http";
+import ResourcesBar from "./ResourcesBar.jsx";
+import PaginationSelector from "./PaginationSelector.jsx";
 import Card from "./Card.jsx";
+import NavBar from "./Navbar.jsx";
 
 class CardsGrid extends Component {
   state = {
@@ -8,6 +11,7 @@ class CardsGrid extends Component {
     seenIds: new Map(), //add some memo to improve app performance
     seenPaths: new Map(),
     count: 0,
+    selectedCardId: null,
     prev: null,
     next: `${process.env.API_URL}${this.props.path}/?page=2`,
     path: `${process.env.API_URL}${this.props.path}/?page=1`,
@@ -31,22 +35,44 @@ class CardsGrid extends Component {
     this.setState({ count, cards: [...cards, ...newCards], prev, next });
   };
 
+  renderNavBar = headers => {
+    return <NavBar headers={headers} />;
+  };
+
+  renderResourcesBar = headers => {
+    return (
+      <div className='col-3 my-3'>
+        {/* render navigation bar */}
+        <ResourcesBar headers={headers} />
+      </div>
+    );
+  };
+
   renderGrid = cards => {
-    const { page } = this.state;
+    const { prev, next, page } = this.state;
     const pageCards = cards.slice((page - 1) * 10, page * 10);
     return (
-      <div className='container-fluid my-3'>
-        <div className='card-columns'>
-          {pageCards &&
-            pageCards.map((card, i) => (
-              <Card
-                key={i}
-                id={i}
-                content={card}
-                onCardSelect={this.handleCardSelect}
-              />
-            ))}
+      <div className='col-6 my-3'>
+        {/* render main grid bar */}
+        <div className='container-fluid'>
+          <div className='card-columns'>
+            {pageCards &&
+              pageCards.map((card, i) => (
+                <Card
+                  key={i + (page - 1) * 10}
+                  id={i + (page - 1) * 10}
+                  content={card}
+                  onCardSelect={this.handleCardSelect}
+                />
+              ))}
+          </div>
         </div>
+        <PaginationSelector
+          prev={prev}
+          next={next}
+          page={page}
+          onPageChange={this.handlePageChange}
+        />
       </div>
     );
   };
@@ -55,7 +81,7 @@ class CardsGrid extends Component {
     const { cards, seenIds } = this.state;
     if (seenIds.has(id)) {
       //If info has been already requested, there's no need to query again
-      return this.setState({ cards }); //card info is already available in cards
+      return this.setState({ selectedCardId: id, cards }); //card info is already available in cards
     } else seenIds.set(id, id);
 
     const card = { ...cards[id] };
@@ -90,8 +116,7 @@ class CardsGrid extends Component {
     card.homeworld = homeworld.name;
     cards[id] = { ...card };
 
-    console.log(cards);
-    this.setState({ cards });
+    this.setState({ cards, selectedCardId: id });
   };
 
   handlePageChange = async (dir, page) => {
