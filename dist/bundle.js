@@ -4555,7 +4555,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var reac
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("module.exports = \"images/loader.gif\";\n\n//# sourceURL=webpack:///./src/components/utils/images/loader.gif?");
+eval("module.exports = \"/images/loader.gif\";\n\n//# sourceURL=webpack:///./src/components/utils/images/loader.gif?");
 
 /***/ }),
 
