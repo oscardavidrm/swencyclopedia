@@ -2,7 +2,7 @@ import React from "react";
 import CardsGrid from "./CardsGrid.jsx";
 import SelectedCard from "./SelectedCard.jsx";
 
-class People extends CardsGrid {
+class Vehicles extends CardsGrid {
   render() {
     const { cards, seenIds, selectedCardId } = this.state;
     return (
@@ -22,4 +22,4 @@ class People extends CardsGrid {
   }
 }
 
-export default People;
+export default Vehicles;
