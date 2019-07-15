@@ -47,7 +47,6 @@ class WikipediaBox extends Component {
     const data = Object.keys(result.query.pages).map(page => {
       // const pattern = new RegExp(/\^==([0-9a-zA-Z]*?)==$/, "igm");
       // const titles = result.query.pages[page].extract.match(pattern);
-      console.log(titles);
       return {
         title: result.query.pages[page].title,
         extract: result.query.pages[page].extract || "Couldn't fetch any data"
